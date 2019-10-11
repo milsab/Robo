@@ -22,15 +22,9 @@ class App extends Component {
     this.setState({ robos: users });
   }
 
-  // ES2015 Promise Syntax
-  // componentDidMount() {
-  //   fetch("https://jsonplaceholder.typicode.com/users")
-  //     .then(response => {
-  //       console.log(response);
-  //       return response.json();
-  //     })
-  //     .then(users => this.setState({ monsters: users }));
-  // }
+  handleChange = (e) => {
+    this.setState({ searchField: e.target.value });
+  }
 
   render() {
     const { robos, searchField } = this.state;
@@ -41,7 +35,7 @@ class App extends Component {
       <div className="App">
         <SearchBox
           placeholder="Search Robos"
-          handleChange={e => this.setState({ searchField: e.target.value })}
+          handleChange={this.handleChange}
         />
         <CardList robos={filteredRobos} />
       </div>
