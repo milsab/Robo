@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { CardList } from "./components/card-list/card-list.component";
+import { SearchBox } from "./components/search-box/search-box.component";
+
 // import { Component } from "react";
-// import logo from "./logo.svg";
+
 import "./App.css";
 
 class App extends Component {
@@ -31,18 +33,15 @@ class App extends Component {
   // }
 
   render() {
-    
     const { robos, searchField } = this.state;
-    const filteredRobos = robos.filter(robo => robo.name.toLowerCase().includes(searchField.toLowerCase()));  
+    const filteredRobos = robos.filter(robo =>
+      robo.name.toLowerCase().includes(searchField.toLowerCase())
+    );
     return (
       <div className="App">
-        <input
-          type="search"
+        <SearchBox
           placeholder="Search Robos"
-          onChange={e => {
-            this.setState({ searchField: e.target.value });
-            console.log(e.target.value);
-          }}
+          handleChange={e => this.setState({ searchField: e.target.value })}
         />
         <CardList robos={filteredRobos} />
       </div>
