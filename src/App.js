@@ -8,7 +8,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      robos: []
+      robos: [],
+      searchField: ""
     };
   }
 
@@ -30,10 +31,20 @@ class App extends Component {
   // }
 
   render() {
+    
+    const { robos, searchField } = this.state;
+    const filteredRobos = robos.filter(robo => robo.name.toLowerCase().includes(searchField.toLowerCase()));  
     return (
       <div className="App">
-        <input type="search" placeholder="search Robos" onChange="" />
-        <CardList robos={this.state.robos} />
+        <input
+          type="search"
+          placeholder="Search Robos"
+          onChange={e => {
+            this.setState({ searchField: e.target.value });
+            console.log(e.target.value);
+          }}
+        />
+        <CardList robos={filteredRobos} />
       </div>
     );
   }
